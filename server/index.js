@@ -85,7 +85,10 @@ app.post('/login', async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.JWT_SECRET)
 
-  res.cookie('token', token).status(200).send({ name: user.name, email: user.email })
+  res.cookie('token', token, {
+    httpOnly: true, 
+    sameSite: 'None', 
+}).status(200).send({ name: user.name, email: user.email })
 })
 
 app.get('/profile', async (req, res) => {
@@ -99,6 +102,13 @@ app.get('/profile', async (req, res) => {
         const user = await User.findById(decodedToken.id)
         res.json(user)
     }
+})
+
+app.post('/logout', async (req, res) => {
+  res.cookie('token', '', {
+    httpOnly: true,
+    sameSite: 'None',
+  }).json(true)
 })
 
 const PORT = process.env.PORT
