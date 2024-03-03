@@ -1,4 +1,5 @@
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 import { useState } from 'react'
 import { UserContext } from '../UserContext'
 import { useContext } from 'react'
@@ -6,7 +7,7 @@ import { useContext } from 'react'
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [redirect, setRedirect] = useState(false)
+    const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
 
     const handleLoginSubmit = async (e) => {
@@ -15,14 +16,11 @@ const Login = () => {
           const {data} = await axios.post('/login', {email,password})
           setUser(data)
           alert('Login successful')
-          setRedirect(true)
+          navigate('/')
         } catch (e) {
           alert('Login failed')
+          console.log(e.message)
         }
-      }
-    
-      if (redirect) {
-        return <Navigate to={'/'} />
       }
 
   return (

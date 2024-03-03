@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const app = express()
 const User = require('./models/user')
+const cookieParser = require('cookie-parser')
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -34,6 +35,7 @@ mongoose.connect(process.env.MONGODB_URL)
   })
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.get('/test', (req, res) => {
     res.json('test ok')
@@ -83,7 +85,20 @@ app.post('/login', async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.JWT_SECRET)
 
-  res.status(200).send({ token, name: user.name, email: user.email })
+  res.cookie('token', token).status(200).send({ name: user.name, email: user.email })
+})
+
+app.get('/profile', async (req, res) => {
+    const {token} = req.cookies
+
+    if(token) {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        if(!decodedToken.id) {
+            return res.status(401).json({ error: 'token invalid' })
+        }
+        const user = await User.findById(decodedToken.id)
+        res.json(user)
+    }
 })
 
 const PORT = process.env.PORT
