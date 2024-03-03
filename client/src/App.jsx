@@ -1,10 +1,23 @@
+import { Route, Routes } from "react-router-dom"
 import Navbar from "./components/Navbar"
+import Home from './pages/Home'
+import Login from "./pages/Login"
+import Registeration from "./pages/Registeration"
+import axios from "axios"
+
+axios.defaults.baseURL = 'http://localhost:3003'
+axios.defaults.withCredentials = true
 
 const App = () => {
   return (
-    <div className="p-4">
-      <Navbar />
-    </div>
+    <>
+    <Navbar />
+    <Routes>
+      <Route path="/"  element={<Home />}/>
+      <Route path="/login"  element={<Login />}/>
+      <Route path="/register"  element={<Registeration />}/>
+    </Routes>
+    </>
   )
 }
 
