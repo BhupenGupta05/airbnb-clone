@@ -88,6 +88,10 @@ app.post('/login', async (req, res) => {
   res.cookie('token', token).status(200).send({ name: user.name, email: user.email })
 })
 
+app.post('/logout', async (req, res) => {
+    res.cookie('token', '').json(true)
+})
+
 app.get('/profile', async (req, res) => {
     const {token} = req.cookies
 
