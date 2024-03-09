@@ -1,0 +1,8 @@
+GET http://localhost:3003/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJodXBlbi5ndXB0YUBnbWFpbC5jb20iLCJpZCI6IjY1ZWIzMWVhYjM5OWM2YzU1YzI4ZmZlOCIsImlhdCI6MTcwOTk2NTcwMiwiZXhwIjoxNzA5OTY5MzAyfQ.Snp933hz1ZeZJwTN6qaGK2o_pU7aedV3LkiDAskOGRI
+
+{
+    "email": "bhupen.gupta@gmail.com",
+    "password": "pass123"
+}

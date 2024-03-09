@@ -1,9 +1,30 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { UserContext } from '../UserContext'
+import profileService from '../services/fetchProfile'
 
 const Navbar = () => {
-    const {user} = useContext(UserContext)
+    const {user, ready, setReady} = useContext(UserContext)
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            if (!user && !ready) {
+              try {
+                // Use the fetchProfile function to fetch user details
+                await profileService.fetchProfile();
+                // setUser(userDetails); // No need to set user details here, as it's handled by the context
+                setReady(true)
+                
+              } catch (error) {
+                console.error("Error fetching user details:", error.message);
+              }
+            }
+          };
+
+          fetchUserDetails()
+
+    }, [user, ready])
+
   return (
         <header className="flex justify-between">
             {/* logo */}
@@ -29,7 +50,7 @@ const Navbar = () => {
             </div>
 
             {/* user */}
-            <Link to={user? '/account' : '/login'} className="flex items-center gap-2 border border-gray-300 rounded-full py-2 px-4">
+            <Link to={user ? '/account': '/login'} className="flex items-center gap-2 border border-gray-300 rounded-full py-2 px-4">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width={20} height={20}>
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
             </svg>
@@ -39,7 +60,7 @@ const Navbar = () => {
                 <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" fill="currentColor"/>
             </svg>
             </div>
-            {!!user && (
+            {ready && user && (
                 <div>{user.name}</div>
             )}
             </Link>

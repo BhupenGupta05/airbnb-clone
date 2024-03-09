@@ -12,9 +12,15 @@ const Login = () => {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault()
+
+        if (!email || !password) {
+          alert('Please enter both email and password')
+          return
+      }
         try {
-          const {data} = await axios.post('/login', {email,password})
+          const {data} = await axios.post('/login', {email, password})
           setUser(data)
+          window.localStorage.setItem('token', data.token)
           alert('Login successful')
           navigate('/')
         } catch (e) {
