@@ -28,7 +28,7 @@ const Booking = () => {
 
   return (
 
-<div className="my-8">
+<div className="my-8 mx-4">
 <h1 className="text-3xl">{booking.place.title}</h1>
 <a className='flex items-center gap-1 font-semibold underline my-2' target="_blank" href={`https://maps.google.com/?q=${booking.place.address}`}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width={10} height={10}>

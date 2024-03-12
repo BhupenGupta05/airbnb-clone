@@ -27,7 +27,7 @@ const Place = () => {
     }
 
   return (
-    <div className="mt-8 bg-gray-100 -mx-8 px-8 pt-8">
+    <div className="mt-8 bg-gray-100 px-8 pt-8">
         <h1 className="text-3xl mx-4">{place?.title}</h1>
         <Location className="mx-4">
             {place.address}

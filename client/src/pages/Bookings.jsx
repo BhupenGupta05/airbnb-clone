@@ -22,7 +22,7 @@ const Bookings = () => {
         fetchBookings()
     }, [])
   return (
-    <div>
+    <div className="mx-4">
         <AccountNav />
         {bookings.length > 0 && bookings.map(booking => (
             <Link key={booking.id} to={`/account/bookings/${booking.id}`} className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden">

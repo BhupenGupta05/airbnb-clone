@@ -110,7 +110,7 @@ const PlaceForm = () => {
   return (
     <div>
       <AccountNav />
-        <form onSubmit={savePlace}>
+        <form onSubmit={savePlace} className="mx-4">
 
         {preInput('Title', 'Title for your place. should be short and catchy as in advertisement')}
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="title, for example: My lovely apt"/>
