@@ -20,7 +20,11 @@ export const UserContextProvider = ({children}) => {
         }
     } catch (error) {
         console.error("Error setting user profile:", error.message);
-        setUser(null);
+
+        if (error.response && error.response.status === 401) {
+          // Handle token expiration here (e.g., redirect to login page)
+          console.log('Token expired. Redirecting to login...');
+        }
     } finally {
         setReady(true);
     }

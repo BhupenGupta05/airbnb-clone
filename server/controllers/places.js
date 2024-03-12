@@ -20,6 +20,18 @@ placesRouter.get('/:id', async (req, res) => {
 placesRouter.post('/', middleware.getTokenFrom, middleware.userExtractor,async (req, res) => {
     try {
         const user = req.user
+        const {
+          title, address,
+          description,
+          perks,
+          extraInfo,
+          photos,
+          checkIn,
+          checkOut,
+          maxGuests,
+          price
+      } = req.body
+
         const place = new Place({
           owner: user.id,
           title, address, description, 
