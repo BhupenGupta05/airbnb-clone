@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState} from "react"
-import axios from "axios"
+import profileService from './services/fetchProfile'
 
 export const UserContext = createContext({})
 
@@ -9,38 +9,24 @@ export const UserContextProvider = ({children}) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      const storedToken = window.localStorage.getItem("token");
+    const fetchProfileAndSetUser = async () => {
+      const response = await profileService.fetchProfile()
   
       try {
-        if (storedToken) {
-          const response = await axios.get("/profile", {
-            headers: { Authorization: `Bearer ${storedToken}` },
-          });
-          setUser(response.data);
-
+        if (response) {
+            setUser(response);
         } else {
-          setUser(null);
-  
+            setUser(null);
         }
-      } catch (error) {
-        console.error("Error fetching user profile:", error.message);
+    } catch (error) {
+        console.error("Error setting user profile:", error.message);
         setUser(null);
-  
-        if (error.response && error.response.status === 401) {
-          // Token might be expired
-          console.log("Token expired. Logging out.");
-          window.localStorage.removeItem("token");
-          setUser(null);
-          // Redirect to login page or show a message to prompt the user to log in again
-          // Example using React Router: history.push('/login');
-        }
-      } finally {
+    } finally {
         setReady(true);
-      }
+    }
     };
 
-    fetchProfile()
+    fetchProfileAndSetUser()
   }, [])
 
   

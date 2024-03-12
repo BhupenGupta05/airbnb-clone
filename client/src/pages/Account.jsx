@@ -1,34 +1,13 @@
 import { useContext } from "react"
 import { UserContext } from "../UserContext"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect } from "react"
 import Places from "./Places"
-import profileService from '../services/fetchProfile'
 import AccountNav from "../components/AccountNav"
 
 const Account = () => {
-    const {user, ready, setUser, setReady} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     let {subpage} = useParams()
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            if (!user && !ready) {
-              try {
-                // Use the fetchProfile function to fetch user details
-                await profileService.fetchProfile();
-                // setUser(userDetails); // No need to set user details here, as it's handled by the context
-                setReady(true)
-                
-              } catch (error) {
-                console.error("Error fetching user details:", error.message);
-              }
-            }
-          };
-
-          fetchUserDetails()
-
-    }, [user, ready])
        
     if(subpage === undefined) {
         subpage = 'profile'

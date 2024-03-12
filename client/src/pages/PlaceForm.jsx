@@ -21,7 +21,12 @@ const PlaceForm = () => {
 
     useEffect(() => {
       const fetchPlacebyId = async () => {
-        const{data} = await axios.get(`/places/${id}`)
+        const storedToken = window.localStorage.getItem("token");
+        const{data} = await axios.get(`/places/${id}`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
         setTitle(data.title)
         setAddress(data.address)
         setPhotos(data.photos)
@@ -65,6 +70,7 @@ const PlaceForm = () => {
 
     const savePlace = async (e) => {
       e.preventDefault()
+      const storedToken = window.localStorage.getItem("token");
 
       const place = { title, address, description, perks, extraInfo, photos, checkIn, checkOut, maxGuests, price }
 
@@ -73,6 +79,10 @@ const PlaceForm = () => {
         try {
           await axios.put('/places', {
             id, ...place
+          }, {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
           })
       
           navigate('/account/places')
@@ -83,7 +93,11 @@ const PlaceForm = () => {
       } else {
         // new
         try {
-          await axios.post('/places', place)
+          await axios.post('/places', place, {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          })
       
           navigate('/account/places')
         } catch (error) {

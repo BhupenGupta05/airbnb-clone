@@ -1,32 +1,12 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import {Link} from 'react-router-dom'
 import { UserContext } from '../UserContext'
-import profileService from '../services/fetchProfile'
 
 const Navbar = () => {
-    const {user, ready, setReady} = useContext(UserContext)
-
-    useEffect(() => {
-        const fetchUserDetails = async () => {
-            if (!user && !ready) {
-              try {
-                // Use the fetchProfile function to fetch user details
-                await profileService.fetchProfile();
-                // setUser(userDetails); // No need to set user details here, as it's handled by the context
-                setReady(true)
-                
-              } catch (error) {
-                console.error("Error fetching user details:", error.message);
-              }
-            }
-          };
-
-          fetchUserDetails()
-
-    }, [user, ready])
+    const {user, ready} = useContext(UserContext)
 
   return (
-        <header className="flex justify-between">
+        <header className="flex justify-between m-4">
             {/* logo */}
             <Link to={'/'} className="flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width={40} height={40}>

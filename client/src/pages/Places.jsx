@@ -7,7 +7,12 @@ const Places = () => {
   const [places, setPlaces] = useState([])
   useEffect(() => {
     const fetchPlaces = async () => {
-      const{data} = await axios.get('/user-places')
+      const storedToken = window.localStorage.getItem("token");
+      const{data} = await axios.get('/user-places', {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
       setPlaces(data)
     }
 

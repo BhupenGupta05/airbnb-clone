@@ -25,12 +25,16 @@ const BookingWidget = ({place}) => {
     }
 
     const bookPlace = async () => { 
-        const response = await axios.post('/bookings', {
+        const storedToken = window.localStorage.getItem("token");
+         await axios.post('/bookings', {
             checkIn, checkOut, numberOfGuests, 
             name, phone, place: place.id,
-            price: numberOfNights * place.price})
-        const bookingId = response.data.id
-        navigate(`/account/bookings/${bookingId}`)
+            price: numberOfNights * place.price}, {
+                headers: {
+                    Authorization: `Bearer ${storedToken}`,
+                },
+            })
+        navigate(`/account/bookings`)
     }
   return (
     <div className="bg-white rounded-2xl p-4">
