@@ -66,25 +66,6 @@ app.use('/user-places', userPlacesRouter)
 app.use('/bookings', bookingsRouter);
 
 
-// app.post('/bookings', async (req, res) => {
-//   try {
-//     const user = req.user
-//     const {place, checkIn, checkOut, numberOfGuests, name, phone, price} = req.body
-
-//       const bookingData = await Booking.create({
-//         place, checkIn, checkOut, numberOfGuests, name, phone, user: user.id, price
-//     })
-//       res.json(bookingData)
-//   } catch (error) {
-//     res.status(500).json({error: 'Internal server error'})
-//   }
-// })
-
-// app.get('/bookings', async (req, res) => {
-//   const user = req.user
-//     res.json(await Booking.find({user: user.id}).populate('place'))
-// })
-
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
