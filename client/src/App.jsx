@@ -11,7 +11,7 @@ import Place from "./pages/Place"
 import Bookings from "./pages/Bookings"
 import Booking from "./pages/Booking"
 
-// axios.defaults.baseURL = 'http://locahost:3003'
+// axios.defaults.baseURL = 'http://localhost:3003'
 axios.defaults.baseURL = 'https://airbnb-backend-gl8k.onrender.com'
 axios.defaults.headers.common['Authorization'] = null
 axios.defaults.withCredentials = true
