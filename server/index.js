@@ -15,7 +15,7 @@ const userPlacesRouter = require('./controllers/user-places')
 const bookingsRouter = require('./controllers/bookings')
 
 app.use(cors({
-    origin: ['https://airbnb-backend-gl8k.onrender.com', 'http://localhost:5173'],
+    origin: 'https://airbnb-backend-gl8k.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
     exposedHeaders: ['set-cookie']
