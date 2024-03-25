@@ -9,7 +9,7 @@ const PlaceImg = ({place, index=0, className=null}) => {
   return (
     <div>
         {place.photos.length > 0 && (
-            <img src={`http://localhost:3003/uploads/${place.photos[index]}`} className={className} alt="" />
+            <img src={`https://airbnb-backend-gl8k.onrender.com/uploads/${place.photos[index]}`} className={className} alt="" />
         )}
     </div>
   )

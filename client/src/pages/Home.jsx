@@ -18,7 +18,7 @@ const Home = () => {
         <Link to={`/place/${place.id}`} key={place.id}>
           <div className="bg-gray-500 mb-2 rounded-2xl overflow-hidden">
             {place.photos?.[0] && (
-              <img className="rounded-2xl object-cover w-full h-40 sm:h-48 lg:h-56" src={`http://localhost:3003/uploads/${place.photos?.[0]}`} alt=""/>
+              <img className="rounded-2xl object-cover w-full h-40 sm:h-48 lg:h-56" src={`https://airbnb-backend-gl8k.onrender.com/uploads/${place.photos?.[0]}`} alt=""/>
             )}
           </div>
           <h2 className=" font-semibold text-md sm:text-md lg:text-lg xl:font-semibold xl:text-2xl">{place.address}</h2>

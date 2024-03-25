@@ -34,7 +34,7 @@ const Places = () => {
               <Link to={`/account/places/${place.id}`} key={place.id} className="flex gap-4 bg-gray-200 rounded-2xl cursor-pointer p-4">
                 <div className="flex w-32 h-32 bg-gray-100 grow shrink-0">
                   {place.photos.length > 0 && (
-                    <img src={`http://localhost:3003/uploads/${place.photos[0]}`} className='object-cover' alt="" />
+                    <img src={`https://airbnb-backend-gl8k.onrender.com/uploads/${place.photos[0]}`} className='object-cover' alt="" />
                   )}
                 </div>
                 <div className="grow-0 shrink">
