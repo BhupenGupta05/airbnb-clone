@@ -15,11 +15,20 @@ const userPlacesRouter = require('./controllers/user-places')
 const bookingsRouter = require('./controllers/bookings')
 
 app.use(cors({
-    origin: 'https://localhost:5173',
+    origin: 'https://airbnb-backend-gl8k.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, 
     exposedHeaders: ['set-cookie']
 }))
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://airbnb-backend-gl8k.onrender.com')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    res.header('Access-Control-Allow-Credentials', 'true')
+    next()
+})
+
 
 console.log('connecting to', process.env.MONGODB_URL)
 mongoose.set('strictQuery', false)
